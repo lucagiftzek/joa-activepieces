@@ -174,6 +174,7 @@ test('get_job, find_company and error mapping (402/404/422/429)', async () => {
   nock(API).get('/v1/companies/google').reply(200, { slug: 'google', name: 'Google' });
   assert.equal((await findCompany.run(ctx({ slug: 'google' }))).name, 'Google');
   await assert.rejects(findCompany.run(ctx({})), /Company Name/);
+  await assert.rejects(getJob.run(ctx({ job: '  ' })), /job id \(uuid\) or slug/);
 
   nock(API).get('/v1/jobs/gone').reply(404, { error: 'not_found', message: 'No listing with that id.' });
   await assert.rejects(getJob.run(ctx({ job: 'gone' })), /Not found.*\(404\).*No listing/);

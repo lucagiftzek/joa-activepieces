@@ -21,7 +21,9 @@ export const getJob = createAction({
     }),
   },
   async run(context) {
-    const ref = encodeURIComponent(context.propsValue.job.trim());
+    const raw = String(context.propsValue.job ?? '').trim();
+    if (!raw) throw new Error('Enter a job id (uuid) or slug.');
+    const ref = encodeURIComponent(raw);
     return joaGet(context.auth, `/v1/jobs/${ref}`, {
       include_closed: context.propsValue.includeClosed ? 'true' : undefined,
     });
