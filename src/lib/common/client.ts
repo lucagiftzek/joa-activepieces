@@ -1,7 +1,7 @@
 import { httpClient, HttpError, HttpMethod, QueryParams } from '@activepieces/pieces-common';
 
 export const JOA_BASE_URL = 'https://api.jobopportunitiesapi.org';
-export const JOA_SIGNUP_URL = 'https://jobopportunitiesapi.org/signup';
+export const JOA_REGISTER_URL = 'https://jobopportunitiesapi.org/register';
 export const JOA_DOCS_URL = 'https://jobopportunitiesapi.org/docs';
 
 /** The SecretText connection value is a string in validate() and { secret_text } in run contexts. */
@@ -30,7 +30,7 @@ export function joaErrorMessage(status: number, body: unknown, retryAfter?: stri
   const said = apiMsg ? ` API said: ${apiMsg}` : '';
   switch (status) {
     case 401:
-      return `Job Opportunities API (JOA) rejected the API key (401). Check the connection; a free key (no card required) is available at ${JOA_SIGNUP_URL}.${said}`;
+      return `Job Opportunities API (JOA) rejected the API key (401). Check the connection; a free key (no card required) is available at ${JOA_REGISTER_URL}.${said}`;
     case 402:
       return `Your Job Opportunities API (JOA) plan has used up its record allowance for this period (402).${said}`;
     case 403:

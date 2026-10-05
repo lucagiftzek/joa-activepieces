@@ -1,9 +1,9 @@
 import { PieceAuth } from '@activepieces/pieces-framework';
-import { joaGet, JoaError, JOA_SIGNUP_URL } from './client';
+import { joaGet, JoaError, JOA_REGISTER_URL } from './client';
 
 export const joaAuth = PieceAuth.SecretText({
   displayName: 'API Key',
-  description: `Your Job Opportunities API (JOA) key. Get a free key (no card required) at [jobopportunitiesapi.org/signup](${JOA_SIGNUP_URL}).`,
+  description: `Your Job Opportunities API (JOA) key. Get a free key (no card required) at [jobopportunitiesapi.org/register](${JOA_REGISTER_URL}).`,
   required: true,
   validate: async ({ auth }) => {
     try {

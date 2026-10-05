@@ -6,7 +6,7 @@ systems and career sites, every field tagged published / inferred / absent, clos
 
 - Website: https://jobopportunitiesapi.org — coverage (live figures): https://jobopportunitiesapi.org/coverage
 - API docs: https://jobopportunitiesapi.org/docs
-- Free API key (no card required): https://jobopportunitiesapi.org/signup
+- Free API key (no card required): https://jobopportunitiesapi.org/register
 
 Package: `@lucagiftzek/piece-job-opportunities-api` (rename the npm scope to the publishing account before release).
 

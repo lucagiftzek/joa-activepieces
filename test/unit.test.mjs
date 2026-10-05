@@ -49,7 +49,7 @@ test('auth validate: ok with /v1/me, clear message on 401', async () => {
   nock(API).get('/v1/me').reply(401, { error: 'invalid_key', message: 'That key is not valid.' });
   const bad = await joaAuth.validate({ auth: 'bad' });
   assert.equal(bad.valid, false);
-  assert.match(bad.error, /rejected the API key \(401\).*signup.*not valid/);
+  assert.match(bad.error, /rejected the API key \(401\).*register.*not valid/);
 });
 
 test('search_jobs sends filters and pages past the server clamp', async () => {
