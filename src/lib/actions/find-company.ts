@@ -33,7 +33,8 @@ export const findCompany = createAction({
   async run(context) {
     const p = context.propsValue;
     if (p.slug && p.slug.trim()) {
-      return joaGet(context.auth, `/v1/companies/${encodeURIComponent(p.slug.trim())}`);
+      const res = await joaGet<{ data?: unknown }>(context.auth, `/v1/companies/${encodeURIComponent(p.slug.trim())}`);
+      return res?.data ?? res;
     }
     if (!p.name || !p.name.trim()) {
       throw new Error('Enter a Company Name to search for, or a Company Slug.');
