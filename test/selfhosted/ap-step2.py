@@ -3,7 +3,7 @@ B='http://127.0.0.1:18080/api/v1'
 st=json.load(open(os.path.expanduser('~/joa-integrations/_aptest/state.json')))
 tok, pid = st['token'], st['projectId']
 KEY=os.environ['JOA_API_KEY']
-PIECE='@lucagiftzek/piece-job-opportunities-api'
+PIECE='@jobopportunitiesapi/piece-job-opportunities-api'
 def req(method, path, body=None):
     data = json.dumps(body).encode() if body is not None else None
     r = urllib.request.Request(B+path, data=data, method=method, headers={'content-type':'application/json','authorization':'Bearer '+tok})
@@ -22,16 +22,16 @@ s,flow=req('POST','/flows',{'displayName':'JOA local test','projectId':pid})
 print('2 flow ->', s); fid=flow['id']; fvid=flow['version']['id']
 auth="{{connections['joa-test']}}"
 s,b=req('POST',f'/flows/{fid}',{'type':'UPDATE_TRIGGER','request':{'name':'trigger','type':'PIECE_TRIGGER','valid':True,'displayName':'New Job',
-   'settings':{'pieceName':PIECE,'pieceVersion':'0.1.0','triggerName':'new_job','input':{'auth':auth,'country':'GB','lookbackHours':24,'maxJobs':5},'propertySettings':{}}}})
+   'settings':{'pieceName':PIECE,'pieceVersion':'0.1.1','triggerName':'new_job','input':{'auth':auth,'country':'GB','lookbackHours':24,'maxJobs':5},'propertySettings':{}}}})
 print('3 update trigger ->', s, '' if s<300 else scrub(b))
 s,b=req('POST','/test-trigger',{'projectId':pid,'flowId':fid,'flowVersionId':fvid,'testStrategy':'TEST_FUNCTION'})
 items = b if isinstance(b,list) else (b.get('data') if isinstance(b,dict) else None)
 print('4 test trigger ->', s, (f'{len(items)} sample(s); first: '+json.dumps({k:items[0].get(k) for k in ('title','company','country','apply_url')})) if items else scrub(b)[:600])
 s,b=req('POST',f'/flows/{fid}',{'type':'ADD_ACTION','request':{'parentStep':'trigger','action':{'name':'step_1','type':'PIECE','valid':True,'displayName':'Search Jobs',
-   'settings':{'pieceName':PIECE,'pieceVersion':'0.1.0','actionName':'search_jobs','input':{'auth':auth,'country':'DE','remote':['remote'],'maxResults':3},'propertySettings':{}}}}})
+   'settings':{'pieceName':PIECE,'pieceVersion':'0.1.1','actionName':'search_jobs','input':{'auth':auth,'country':'DE','remote':['remote'],'maxResults':3},'propertySettings':{}}}}})
 print('5 add search_jobs ->', s, '' if s<300 else scrub(b))
 s,b=req('POST',f'/flows/{fid}',{'type':'ADD_ACTION','request':{'parentStep':'step_1','action':{'name':'step_2','type':'PIECE','valid':True,'displayName':'Get Job',
-   'settings':{'pieceName':PIECE,'pieceVersion':'0.1.0','actionName':'get_job','input':{'auth':auth,'job':'{{trigger.slug}}'},'propertySettings':{}}}}})
+   'settings':{'pieceName':PIECE,'pieceVersion':'0.1.1','actionName':'get_job','input':{'auth':auth,'job':'{{trigger.slug}}'},'propertySettings':{}}}}})
 print('6 add get_job ->', s, '' if s<300 else scrub(b))
 for step in ('step_1','step_2'):
     s,b=req('POST','/sample-data/test-step',{'projectId':pid,'flowVersionId':fvid,'stepName':step})

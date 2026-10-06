@@ -8,7 +8,7 @@ systems and career sites, every field tagged published / inferred / absent, clos
 - API docs: https://jobopportunitiesapi.org/docs
 - Free API key (no card required): https://jobopportunitiesapi.org/register
 
-Package: `@lucagiftzek/piece-job-opportunities-api` (rename the npm scope to the publishing account before release).
+Package: `@jobopportunitiesapi/piece-job-opportunities-api` on npm.
 
 ## Contents
 
@@ -35,7 +35,7 @@ npm install
 npm test            # tsc build + 8 unit tests (nock)
 set -a; . ~/.config/joa-integrations/test.env; set +a
 npm run test:live   # 5 live tests
-npm run pack        # -> lucagiftzek-piece-job-opportunities-api-0.1.0.tgz (packed from dist/)
+npm run pack        # -> jobopportunitiesapi-piece-job-opportunities-api-0.1.1.tgz (packed from dist/)
 ```
 
 **Layout note (verified on a self-hosted Activepieces 0.82.0):** Activepieces imports

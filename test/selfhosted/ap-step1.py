@@ -16,9 +16,9 @@ if 'token' not in st:
     if s<300: st={'token':b['token'],'projectId':b['projectId'],'platformId':b.get('platformId')}; json.dump(st, open(st_path,'w')); os.chmod(st_path,0o600)
 tok=st['token']
 # install piece archive
-tgz=os.path.expanduser('~/joa-integrations/activepieces/lucagiftzek-piece-job-opportunities-api-0.1.0.tgz')
+tgz=os.path.expanduser('~/joa-integrations/activepieces/jobopportunitiesapi-piece-job-opportunities-api-0.1.1.tgz')
 out = subprocess.run(['curl','-s','-w','\nHTTP %{http_code}','-X','POST',B+'/pieces','-H','authorization: Bearer '+tok,
-  '--form-string','packageType=ARCHIVE','--form-string','pieceName=@lucagiftzek/piece-job-opportunities-api','--form-string','pieceVersion=0.1.0','--form-string','scope=PLATFORM',
+  '--form-string','packageType=ARCHIVE','--form-string','pieceName=@jobopportunitiesapi/piece-job-opportunities-api','--form-string','pieceVersion=0.1.1','--form-string','scope=PLATFORM',
   '-F','pieceArchive=@'+tgz], capture_output=True, text=True)
 print('install', out.stdout[-800:])
 s,b = req('GET','/pieces/%40lucagiftzek%2Fpiece-job-opportunities-api', token=tok)

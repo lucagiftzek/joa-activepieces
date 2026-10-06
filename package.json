@@ -1,6 +1,6 @@
 {
-  "name": "@lucagiftzek/piece-job-opportunities-api",
-  "version": "0.1.0",
+  "name": "@jobopportunitiesapi/piece-job-opportunities-api",
+  "version": "0.1.1",
   "description": "Activepieces piece for Job Opportunities API (JOA): employer-direct job postings with closures tracked.",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",

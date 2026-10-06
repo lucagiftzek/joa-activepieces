@@ -9,10 +9,10 @@ def req(method, path, body=None):
         with urllib.request.urlopen(r, timeout=120) as resp: return resp.status, json.loads(resp.read() or b'null')
     except urllib.error.HTTPError as e:
         return e.code, e.read().decode()[:500]
-PIECE='@lucagiftzek/piece-job-opportunities-api'
+PIECE='@jobopportunitiesapi/piece-job-opportunities-api'
 for trig, inp in (('job_closed',{'maxClosures':100}),('job_changed',{'maxChanges':50})):
     s,b=req('POST',f'/flows/{fid}',{'type':'UPDATE_TRIGGER','request':{'name':'trigger','type':'PIECE_TRIGGER','valid':True,'displayName':trig,
-       'settings':{'pieceName':PIECE,'pieceVersion':'0.1.0','triggerName':trig,'input':{'auth':"{{connections['joa-test']}}",**inp},'propertySettings':{}}}})
+       'settings':{'pieceName':PIECE,'pieceVersion':'0.1.1','triggerName':trig,'input':{'auth':"{{connections['joa-test']}}",**inp},'propertySettings':{}}}})
     s,flow=req('GET',f'/flows/{fid}'); fvid=flow['version']['id']
     s,b=req('POST','/test-trigger',{'projectId':pid,'flowId':fid,'flowVersionId':fvid,'testStrategy':'TEST_FUNCTION'})
     data=b.get('data') if isinstance(b,dict) else None

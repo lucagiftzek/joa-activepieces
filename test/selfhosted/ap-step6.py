@@ -13,9 +13,9 @@ def req(method, path, body=None, base=B, headers=None):
 s,j=req('GET','/v1/jobs?limit=1&country=FR',base='https://api.jobopportunitiesapi.org',headers={'authorization':'Bearer '+KEY,'user-agent':'joa-integrations-local-test/0.1'})
 if s!=200: print('JOA lookup failed', s, str(j)[:200]); raise SystemExit(1)
 slug=j['data'][0]['slug']
-PIECE='@lucagiftzek/piece-job-opportunities-api'
+PIECE='@jobopportunitiesapi/piece-job-opportunities-api'
 s,b=req('POST',f'/flows/{fid}',{'type':'UPDATE_ACTION','request':{'name':'step_3','type':'PIECE','valid':True,'displayName':'Get Job',
-   'settings':{'pieceName':PIECE,'pieceVersion':'0.1.0','actionName':'get_job','input':{'auth':"{{connections['joa-test']}}",'job':slug},'propertySettings':{}}}})
+   'settings':{'pieceName':PIECE,'pieceVersion':'0.1.1','actionName':'get_job','input':{'auth':"{{connections['joa-test']}}",'job':slug},'propertySettings':{}}}})
 print('update step_3 ->', s)
 s,flow=req('GET',f'/flows/{fid}'); fvid=flow['version']['id']
 s,run=req('POST','/sample-data/test-step',{'projectId':pid,'flowVersionId':fvid,'stepName':'step_3'})
