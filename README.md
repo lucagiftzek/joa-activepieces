@@ -49,6 +49,10 @@ pieces. Packing the repository root (`main: ./dist/src/index.js`) fails to insta
 container (start, sign up a local admin, upload the tarball, create a connection, build a flow, test the trigger
 and steps). See [PUBLISHING.md](PUBLISHING.md) and the leg report for the results.
 
+## Showing listings publicly
+
+If you display the listings publicly, the Job Opportunities API terms ask for a visible credit, "Data: Job Opportunities API", linking to https://jobopportunitiesapi.org.
+
 ## Licence
 
 MIT — see [LICENSE](LICENSE). Maintainer: Loukas Tzekos <support@jobopportunitiesapi.org>.
